@@ -1,0 +1,109 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mini_Project
+{
+
+    public class ArrayMin
+    {
+        public static int Min()
+        {
+            Console.Write("Dizi boyutunu girin: ");
+            int size = Convert.ToInt32(Console.ReadLine());
+
+            int[] array = new int[size];
+            Console.WriteLine("Diziyi doldurun:");
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write("Element {0}: ", i + 1);
+                array[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            int min = array[0];
+            for (int i = 1; i < size; i++)
+            {
+                if (array[i] < min)
+                    min = array[i];
+            }
+
+            return min;
+        }
+    }
+
+    public class Employee
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public double Salary { get; set; }
+
+        public Employee(string id, string name, string position, double salary)
+        {
+            ID = id;
+            Name = name;
+            Position = position;
+            Salary = salary;
+        }
+
+        public virtual double CalculateBonus()
+        {
+            return 0; // Default bonus
+        }
+    }
+
+    public class Developer : Employee
+    {
+        public Developer(string id, string name, double salary) : base(id, name, "Developer", salary) { }
+
+        public override double CalculateBonus()
+        {
+            double fixedBonus = 50000;
+            double percentageBonus = Salary * 0.20;
+            return Math.Max(fixedBonus, percentageBonus);
+        }
+    }
+
+    public class Manager : Employee
+    {
+        public Manager(string id, string name, double salary) : base(id, name, "Manager", salary) { }
+
+        public override double CalculateBonus()
+        {
+            double fixedBonus = 50000;
+            double percentageBonus = Salary * 0.25;
+            return Math.Max(fixedBonus, percentageBonus);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Developer developer = new Developer("001", "Feyzi Can", 60000);
+            Manager manager = new Manager("002", "abdullah emin", 80000);
+
+            Console.WriteLine("Developer:");
+            Console.WriteLine("ID: " + developer.ID);
+            Console.WriteLine("Name: " + developer.Name);
+            Console.WriteLine("Position: " + developer.Position);
+            Console.WriteLine("Salary: " + developer.Salary);
+            Console.WriteLine("Bonus: " + developer.CalculateBonus());
+
+            Console.WriteLine();
+
+            Console.WriteLine("Manager:");
+            Console.WriteLine("ID: " + manager.ID);
+            Console.WriteLine("Name: " + manager.Name);
+            Console.WriteLine("Position: " + manager.Position);
+            Console.WriteLine("Salary: " + manager.Salary);
+            Console.WriteLine("Bonus: " + manager.CalculateBonus());
+        }
+
+    }
+
+}
+
+        
